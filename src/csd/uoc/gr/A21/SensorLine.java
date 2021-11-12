@@ -1,6 +1,6 @@
 package csd.uoc.gr.A21;
 
-class SensorLine {
+public class SensorLine {
     private String id = "Anonymous sensorLine ";
     private int activeCapacity = 0;
     int num_violated = 0;
