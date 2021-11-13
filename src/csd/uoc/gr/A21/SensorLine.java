@@ -4,6 +4,7 @@ public class SensorLine {
     private String id = "Anonymous sensorLine ";
     private int activeCapacity = 0;
     int num_violated = 0;
+
     String[] violated_id = new String[1000];
 
     public void setActiveCapacity(int cap) {
@@ -20,7 +21,12 @@ public class SensorLine {
         }
 
     }
+    private boolean[] on = new boolean[activeCapacity];
 
+    public boolean[] GetOn(){
+        SetOn();
+        return on;
+    }
     public void setOn(boolean on) {
         for (int i = 0; i < activeCapacity; i++) sensors[i].seton(on);
     }
@@ -57,7 +63,13 @@ public class SensorLine {
         }
         return ActiveSensors;
     }
-
+    public void SetOn(){
+        Sensor[] AS;
+        AS = getSensors();
+        for(int i=0;i<AS.length;i++){
+            on[i]= AS[i].getOn();
+        }
+    }
     @Override
     public String toString() {
         return "SensorLine " + id + "\nNumber of Sensors =" + (activeCapacity) + "\nviolated =" + isViolated() + "\n# of violated sensors=" + num_violated + "\nIds Violated: " + violatedSens();
