@@ -15,24 +15,13 @@ public abstract class Weapon {
     public int getPower(){
         return power;
     }
-    void setHolder(WeaponCarrier holder){
+    public void setHolder(WeaponCarrier holder){
         this.holder = holder;
     }
 
-    WeaponCarrier getHolder(){
+    public WeaponCarrier getHolder(){
         return holder;
     }
     public abstract String toString();
-}
-
-interface Warrior{
-
-    void attack(Warrior adversary);
-    boolean isDefeated();
-    int getHealthCondition();
-    void setHealthCondition(int condition);
-    int getPower();
-    String getCallSign();
-
 }
 

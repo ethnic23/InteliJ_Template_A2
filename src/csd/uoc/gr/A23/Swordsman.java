@@ -11,15 +11,16 @@ public class Swordsman extends Soldier {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+        this.weapon.setHolder(this);
     }
 
     @Override
     public String toString() {
-        return "The swordsman " + this.getCallSign() + " has power " + this.getPower() + " and health " + this.getHealthCondition() + ".";
+        return "The swordsman " + this.getCallSign() + " has power " + this.getPower() + " and health " + this.getHealthCondition();
     }
 
     @Override
     public void attack(Warrior adversary) {
-
+        adversary.setHealthCondition(adversary.getHealthCondition()-power);
     }
 }

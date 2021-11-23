@@ -1,6 +1,8 @@
 package csd.uoc.gr.A23.got;
 import csd.uoc.gr.A23.HouseLannister;
 import csd.uoc.gr.A23.HouseStark;
+
+import java.util.Objects;
 import java.util.Random;
 import csd.uoc.gr.A23.Arc;
 import csd.uoc.gr.A23.Sword;
@@ -21,7 +23,7 @@ public class GoT {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         HouseStark houseStark = null;
         HouseLannister houseLannister = null;
         try {
@@ -97,7 +99,8 @@ public class GoT {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            System.out.println(houseStark.isDefeated() ? houseLannister.toString() : houseStark.toString());
+
+            System.out.println(houseStark.isDefeated() ? Objects.requireNonNull(houseLannister).toString() : houseStark.toString());
             System.out.println("Won the Iron Throne!");
         }
     }

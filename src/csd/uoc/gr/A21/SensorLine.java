@@ -1,17 +1,31 @@
 package csd.uoc.gr.A21;
 
 public class SensorLine {
-    private String id = "Anonymous sensorLine ";
+    private final String id = "Anonymous sensorLine ";
     private int activeCapacity = 0;
     int num_violated = 0;
-
-    String[] violated_id = new String[1000];
-
-    public void setActiveCapacity(int cap) {
-        activeCapacity = cap;
+    public SensorLine(){}
+    public SensorLine(int loc,int M){
+        if(loc == 1){
+            for(int i=0;i<M;i++){
+                add(new LaserSensor("SID"+i));
+            }
+        }else{
+            for(int i=0;i<M;i++){
+                if(i%2==0){
+                    add(new LaserSensor("SID"+i));
+                }else{
+                    add(new TemperatureSensor("SID"+i));
+                }
+            }
+        }
     }
+    String[] violated_id = new String[1000];
+    public String getId(){return this.id;}
 
-    private Sensor[] sensors = new Sensor[1000];
+    public void setActiveCapacity(int cap) {activeCapacity = cap;}
+
+    private final Sensor[] sensors = new Sensor[1000];
 
     public void add(Sensor s) {
 
@@ -28,7 +42,7 @@ public class SensorLine {
         return on;
     }
     public void setOn(boolean on) {
-        for (int i = 0; i < activeCapacity; i++) sensors[i].seton(on);
+        for (int i = 0; i <= activeCapacity; i++) sensors[i].seton(on);
     }
 
     public boolean isViolated() {
@@ -58,7 +72,7 @@ public class SensorLine {
 
     public Sensor[] getSensors() {
         Sensor[] ActiveSensors = new Sensor[activeCapacity];
-        for (int i = 0; i < activeCapacity + 1; i++) {
+        for (int i = 0; i < activeCapacity; i++) {
             ActiveSensors[i] = sensors[i];
         }
         return ActiveSensors;

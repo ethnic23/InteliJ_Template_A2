@@ -1,12 +1,13 @@
 package csd.uoc.gr.A23;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class GreatHouse {
     final String name, sigil, words, lord;
-    List<Soldier> army;
-
+    final ArrayList<Soldier> army = new ArrayList<Soldier>();
+    boolean empty =true;
     public GreatHouse(String name, String sigil, String words, String lord) {
         this.name = name;
         this.sigil = sigil;
@@ -16,20 +17,29 @@ public abstract class GreatHouse {
 
     public void addSoldier(Soldier soldier) {
         army.add(soldier);
+        empty = false;
     }
 
     public Soldier getSoldier() {
         int randomElementIndex = ThreadLocalRandom.current().nextInt(army.size()) % army.size();
+        while(army.get(randomElementIndex).isDefeated()){
+            randomElementIndex = ThreadLocalRandom.current().nextInt(army.size())%army.size();
+        }
         return army.get(randomElementIndex);
     }
 
-    public boolean isDefeated() {
-        for (int i = 0; i < army.size(); i++) {
-            if (!(army.get(i).isDefeated())) {
-                return false;
+    public boolean isDefeated() throws Exception {
+        if(army.size()!=0){
+            for (int i = 0; i < army.size(); i++) {
+              if (!(army.get(i).isDefeated())) {
+                    return false;
+              }
             }
+            return true;
+        }else{
+            throw new Exception("EmptyArmyExceptionError");
         }
-        return true;
+
     }
 
     public String toString() {

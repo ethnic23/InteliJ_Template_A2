@@ -11,7 +11,7 @@ public abstract class WeaponCarrier {
         return weapon;
     }
 
-    abstract void setWeapon(Weapon weapon);
+    public abstract void setWeapon(Weapon weapon);
 
     public boolean hasWeapon() {
         return weapon != null;
